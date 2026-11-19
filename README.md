@@ -13,6 +13,7 @@ No build step: plain HTML and one CSS file. Edit, then push.
 | `css/apartment.css` | All styles. The top part is the kitchen page's theme; the apartment-only styles are at the end, under "apartment page (v1)". If you change this file, bump `css/apartment.css?v=` in `index.html` in the same commit. |
 | `images/optimized/` | Andrius's photo, the award photo, commercial client photos, accreditation marks, partner logos. |
 | `images/on-site/` | The on-site photo of one of our fitters (shown in "The works" step). |
+| `images/reviews/` | Stevie Downard's four flat photos from their Google review (`full/` for the photo viewer, `low/` for the card). |
 | `images/placeholders/` | Marked placeholder images. Delete the folder once every placeholder is replaced. |
 | `images/flats/` | Created by the photo script for real flat photos. |
 | `images/og-image.jpg` | The preview image shown when the link is shared (1200 x 630). |
@@ -58,8 +59,8 @@ No build step: plain HTML and one CSS file. Edit, then push.
 
 ## Before the first launch
 
-1. **Placeholders:** five left: three gallery tiles and two review cards. Each is marked `PLACEHOLDER` in
-   `index.html` and outlined in red dashes on the page. `(Select-String -Path index.html -Pattern "PLACEHOLDER").Count`
+1. **Placeholders:** three left, all gallery tiles. Each is marked `PLACEHOLDER` in `index.html` and outlined in red
+   dashes on the page. `(Select-String -Path index.html -Pattern "PLACEHOLDER").Count`
    must return `0` before launch.
 2. **Subdomain:** `apartment.ag-renovations.co.uk` is a working name until the Keyword Planner check ("flat" vs
    "apartment"). It appears in `CNAME`, the canonical and `og:` tags, the schema `image`, and the phone-conversion
@@ -67,11 +68,13 @@ No build step: plain HTML and one CSS file. Edit, then push.
 3. **Review figures** checked live on the day: the page shows Google 5.0 from 60 and Trustpilot 4.7 from 48 (hero
    trust row and reviews section), the October catalogue figures.
 4. **Photo rights:** every gallery photo is a real A&G flat that A&G has the right to use; every review photo has the
-   reviewer's permission. Areas only on captions, never streets or postcodes.
+   reviewer's permission (Stevie Downard: four photos). Areas only on captions, never streets or postcodes.
 5. **Wording written for this page, to confirm:** "doors, frames and skirting" (floors and carpentry stage), "Most
    London flats are leasehold" (before you start), and "Most of our full refurbishments include layout changes" (FAQ).
-6. **Zap mapping:** confirm the CRM files `Apartment Refurbishment` as "Complete apartment or home refurbishment".
-7. **Test the live form once before any campaign points here**, with "TEST" in the message, and confirm it reaches the
+6. **Review wording:** Helen, E14's quote was read from a low-resolution screenshot; check it word for word against
+   Google. Replace each review card's link with that review's own share link (marked `REVIEW LINK`).
+7. **Zap mapping:** confirm the CRM files `Apartment Refurbishment` as "Complete apartment or home refurbishment".
+8. **Test the live form once before any campaign points here**, with "TEST" in the message, and confirm it reaches the
    CRM labelled as an apartment enquiry.
 
 ## Adding flat projects
@@ -88,10 +91,17 @@ a tile opens that project's photos only. Pick 5 to 9 photos per project with no 
 
 ## Reviews on the page
 
-Review text is quoted word for word from Google. Where "…" appears, a passage was left out: staff names other than
-Andrius, and any mention of the platform the client booked through. To add a review, copy a review card from the
-kitchen page's `index.html` (the `<article class="rcard">` block, with its photos and Google link) in place of a
-placeholder card, and change the name, text, photos and link.
+Seven Google reviews, chosen because they are about flats or whole homes: Stevie Downard (featured, with four photos
+of the flat), HMM, Marco Pisoni, Helen E14, Gou Run, Sarah Dawkins and Luke Holland. The other six are text only until
+those clients' photos are available.
+
+Review text is quoted word for word. Where "…" appears, a passage was left out: staff names other than Andrius, any
+mention of the platform the client booked through, and lines that don't fit a flat refurbishment (Helen's "I didn't
+have to move out even for one night", a house project; Stevie's em dash sentence opener, per the no-em-dash rule).
+Reviews from people who share Andrius's surname, and from Mindaugas, are not used.
+
+To give a text-only review its photos, copy the photo button from Stevie's card (`<button class="rphotos">`) into that
+card, above its `REVIEW LINK` comment, and point it at the new photos in `images/reviews/`.
 
 ## Every deploy (staging, then live)
 
